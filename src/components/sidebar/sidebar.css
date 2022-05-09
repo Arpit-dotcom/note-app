@@ -1,0 +1,33 @@
+.drawer {
+  width: 100%;
+  background-color: var(--primary-color);
+  border-top: 1px solid var(--white-section);
+  position: sticky;
+  top: 4.7rem;
+  height: 40.3rem;
+}
+
+.stacked-list {
+  width: 100%;
+  background-color: var(--primary-color);
+  text-decoration: none;
+  border: none;
+  font-size: 1.3rem;
+  text-align: left;
+}
+
+.link {
+  color: var(--white-section);
+  text-decoration: none;
+}
+
+.list-item .fas,
+.list-item .far {
+  margin: 0 0.5rem;
+}
+
+.list-item {
+  margin: 0;
+  display: block;
+  border: none !important;
+}

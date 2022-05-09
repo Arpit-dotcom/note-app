@@ -1,0 +1,11 @@
+.container{
+    height: 72vh;
+}
+
+.sub-container{
+    display: block !important;
+}
+
+.link-btn .link-primary,.link-btn .link-primary:hover{
+    background-color: var(--primary-color);
+}
