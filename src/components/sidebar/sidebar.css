@@ -1,7 +1,6 @@
 .drawer {
   width: 100%;
   background-color: var(--primary-color);
-  border-top: 1px solid var(--white-section);
   position: sticky;
   top: 4.7rem;
   height: 40.3rem;

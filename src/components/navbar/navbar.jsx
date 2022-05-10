@@ -4,7 +4,7 @@ export const Navbar = () =>{
     return (
       <nav className="simple-navigation">
         <span className="nav-list">
-          <h1 className="text">Laugh Factory</h1>
+          <h1 className="text">Note App</h1>
         </span>
 
         <input
