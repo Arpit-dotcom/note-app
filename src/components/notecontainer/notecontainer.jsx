@@ -1,12 +1,13 @@
 import "./notecontainer.css";
+import parse from "html-react-parser";
 
-export const NoteContainer = () =>{
-    return (
-      <section className="note-container">
-        <div className="note-block">
-          <p className="note-title">Pinned node</p>
-          <p className="note-text">Hey it's a pinned note</p>
-        </div>
-      </section>
-    );
-}
+export const NoteContainer = ({ title, text, color }) => {
+  return (
+    <section className="note-container">
+      <div className="note-block" style={{ backgroundColor: color }}>
+        <span className="note-title">{title}</span>
+        <span className="note-text">​{parse(`${text}`)}</span>
+      </div>
+    </section>
+  );
+};

@@ -1,11 +1,12 @@
+import { Link } from "react-router-dom";
 import "./sidebar.css";
 
 export const Sidebar = () => {
   const categories = [
-    { icons: "fas fa-home", text: "Home" },
-    { icons: "fas fa-tag", text: "Label" },
-    { icons: "fas fa-archive", text: "Archive" },
-    { icons: "fas fa-trash", text: "Trash" },
+    { icons: "fas fa-home", text: "Home", link: "/home" },
+    { icons: "fas fa-tag", text: "Label", link: "/label" },
+    { icons: "fas fa-archive", text: "Archive", link: "/archive" },
+    { icons: "fas fa-trash", text: "Trash", link: "/trash" },
   ];
 
   return (
@@ -13,10 +14,10 @@ export const Sidebar = () => {
       <ul className="sub-drawer stacked-list">
         {categories.map((category, index) => (
           <li className="list-item" key={index}>
-            <a className="link" href="">
+            <Link className="link" to={category.link}>
               <i className={category.icons}></i>
               <span>{category.text}</span>
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

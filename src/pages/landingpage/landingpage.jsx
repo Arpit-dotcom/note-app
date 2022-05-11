@@ -1,12 +1,11 @@
 import "./landingpage.css";
 import pic from "../../assets/landpage.svg";
-import { Navbar } from "../../components/navbar/navbar";
-import { Footer } from "../../components/footer/footer";
+import { Footer } from "../../components";
+import { Link } from "react-router-dom";
 
 export const LandingPage = () => {
   return (
     <>
-      <Navbar />
       <div className="area">
         <section className="container">
           <img className="container-img" src={pic} alt="container-image" />
@@ -18,9 +17,9 @@ export const LandingPage = () => {
               you will store different content access it in one click
             </p>
             <div className="link-btn">
-              <a className="link link-primary" href="/documentation/docs.html">
+              <Link className="link link-primary" to="/home">
                 Get Started
-              </a>
+              </Link>
             </div>
           </span>
         </section>

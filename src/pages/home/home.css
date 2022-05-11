@@ -4,6 +4,12 @@
     background-color: var(--bg-color);
 }
 
+.fa-map-pin{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
 .content{
     padding: 1rem;
     width: 100%;
@@ -22,12 +28,34 @@
     background-color: var(--white-section);
 }
 
+.quill{
+    background-color: var(--white-section);
+}
+
+.color-pallete{
+    display: flex;
+    margin-top: 1rem;
+}
+
+.color-selector{
+    margin-right: 1rem;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    border: 1px solid black;
+}
+
 .add-note{
+    position: relative;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    width: 35rem;
+    width: 50rem;
     margin: auto;
+}
+
+.ql-toolbar.ql-snow{
+    text-align: left;
 }
 
 .title, .text-area{
