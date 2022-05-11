@@ -1,6 +1,9 @@
+import { Link } from "react-router-dom";
+import { useAuth } from "../../context";
 import "./navbar.css";
 
 export const Navbar = () =>{
+  const { isLoggedIn } = useAuth();
     return (
       <nav className="simple-navigation">
         <span className="nav-list">
@@ -15,10 +18,10 @@ export const Navbar = () =>{
 
         <div className="nav-list">
           <div className="list-item icons">
-            <a className="profile">
+            <Link className="profile" to={isLoggedIn ? "/logout" : "/login"}>
               <i className="fas fa-user"></i>
-              <small className="nav-icon-text">Login</small>
-            </a>
+              <small className="nav-icon-text">{isLoggedIn ? "Logout" : "Login" }</small>
+            </Link>
           </div>
         </div>
       </nav>

@@ -1,4 +1,4 @@
-import { Navbar, NoteContainer, Sidebar } from "../../components";
+import { NoteContainer, Sidebar } from "../../components";
 import uuid from "react-uuid";
 import "./home.css";
 import ReactQuill from "react-quill";
@@ -52,7 +52,6 @@ export const Home = () => {
 
   return (
     <>
-      <Navbar />
       <section className="home">
         <Sidebar />
 

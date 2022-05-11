@@ -1,13 +1,11 @@
 import "./landingpage.css";
 import pic from "../../assets/landpage.svg";
-import { Navbar } from "../../components";
 import { Footer } from "../../components";
 import { Link } from "react-router-dom";
 
 export const LandingPage = () => {
   return (
     <>
-      <Navbar />
       <div className="area">
         <section className="container">
           <img className="container-img" src={pic} alt="container-image" />
