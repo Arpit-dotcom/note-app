@@ -1,8 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useReducer } from "react";
 import axios from "axios";
-import { useAuth } from "../context";
-import { signUpReducer } from "../reducer";
+import { useAuth } from "context";
+import { signUpReducer } from "reducer";
 
 export const useSignup = () => {
   const { setIsLoggedIn } = useAuth();

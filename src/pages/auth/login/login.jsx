@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./login.css";
 import { useEffect } from "react";
-import { useLogin } from "../../../utils";
+import { useLogin } from "utils";
 
 export const Login = () => {
   const {
@@ -26,7 +26,7 @@ export const Login = () => {
         <small>See your growth and consulting support</small>
       </div>
 
-      <form className="margin-2" action="login">
+      <form className="margin-2 form" action="login">
         <label htmlFor="Email">
           Email
           <input

@@ -1,6 +1,6 @@
 import "./logout.css";
 import { useEffect } from "react";
-import { useLogout } from "../../../utils";
+import { useLogout } from "utils";
 
 export const Logout = () => {
   const { notLogOutHandler, logOutHandler } = useLogout();

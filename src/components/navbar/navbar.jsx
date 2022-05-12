@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useAuth } from "../../context";
+import { useAuth } from "context";
 import "./navbar.css";
 
 export const Navbar = () =>{

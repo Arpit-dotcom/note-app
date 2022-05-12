@@ -23,6 +23,10 @@
   color: var(--default);
 }
 
+.loginContainer .form{
+  padding: 2rem;
+}
+
 .loginContainer .submit {
   padding: 0.5rem;
   border-radius: 1rem;

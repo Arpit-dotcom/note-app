@@ -1,7 +1,7 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
-import { useAuth } from "../context";
+import { useAuth } from "context";
 
 export const useLogin = () => {
   const [_email, setEmail] = useState("");
@@ -17,7 +17,6 @@ export const useLogin = () => {
         email: _email,
         password: _password,
       });
-      console.log(response);
       localStorage.setItem("token", response.data.encodedToken);
       setIsLoggedIn(true);
       navigate(location.state?.from?.pathname || "/home", {
