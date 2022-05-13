@@ -1,6 +1,6 @@
 import "./landingpage.css";
-import pic from "../../assets/landpage.svg";
-import { Footer } from "../../components";
+import pic from "assets/landpage.svg";
+import { Footer } from "components";
 import { Link } from "react-router-dom";
 
 export const LandingPage = () => {

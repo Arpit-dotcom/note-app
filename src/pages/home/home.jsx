@@ -1,54 +1,70 @@
-import { NoteContainer, Sidebar } from "../../components";
-import uuid from "react-uuid";
+import { NoteContainer, Sidebar } from "components";
 import "./home.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useState } from "react";
+import { useEffect, useReducer } from "react";
 import axios from "axios";
+import { useNote } from "context";
+import { quillModules, color } from "staticdata";
+import { noteReducer } from "reducer";
 
 export const Home = () => {
-  const quillModules = {
-    toolbar: [
-      ["bold", "italic", "underline", "strike", "image", "video", "link"], // toggled buttons
-      ["blockquote", "code-block"],
+  let myCurrentDateTime = new Date();
+  const { sortedNote, setNoteData } = useNote();
+  const [noteState, noteDispatch] = useReducer(noteReducer, {
+    title: "",
+    text: "",
+    color: "",
+    pinned: false,
+  });
 
-      [{ header: 1 }, { header: 2 }], // custom button values
-      [{ list: "ordered" }, { list: "bullet" }],
-      [{ script: "sub" }, { script: "super" }], // superscript/subscript
-      [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
-      [{ direction: "rtl" }], // text direction
+  useEffect(() => {
+    document.title = "Note App | Home";
+  }, []);
 
-      [{ size: ["small", false, "large", "huge"] }], // custom dropdown
-      [{ header: [1, 2, 3, 4, 5, 6, false] }],
-
-      [{ font: [] }],
-      [{ align: [] }],
-
-      ["clean"], // remove formatting button
-    ],
-  };
-
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
-  const [color, setColor] = useState("");
-  const [pinned, setPinned] = useState(false);
-
-  const saveHandler = (e) => {
+  const saveHandler = async (e) => {
+    const token = localStorage.getItem("token");
     e.preventDefault();
-    (async () => {
-      const response = await axios.post("/api/notes", {
-        _id: uuid(),
-        title: title,
-        text: text,
-        color: color,
-        pinned: pinned,
-      });
-    })()
-    setColor("");
-    setTitle("");
-    setText("");
-    setPinned(false);
+    const note = {
+      title: noteState.title,
+      text: noteState.text,
+      color: noteState.color,
+      pinned: noteState.pinned,
+      date: currentDate,
+      time: currentTime,
+    };
+    try {
+      const response = await axios.post(
+        "/api/notes",
+        { note },
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
+      setNoteData(response.data.notes);
+      noteDispatch({ type: "RESET" });
+    } catch (e) {
+      console.log(e);
+    }
   };
+
+  const pinnedArray = sortedNote.filter((note) => note.pinned);
+  const unPinnedArray = sortedNote.filter((note) => !note.pinned);
+  let currentDate =
+    myCurrentDateTime.getDate() +
+    "/" +
+    (myCurrentDateTime.getMonth() + 1) +
+    "/" +
+    myCurrentDateTime.getFullYear();
+  
+    let currentTime =
+    myCurrentDateTime.getHours() +
+    ":" +
+    myCurrentDateTime.getMinutes() +
+    ":" +
+    myCurrentDateTime.getSeconds();
 
   return (
     <>
@@ -60,78 +76,73 @@ export const Home = () => {
             <i
               className="cursor-pointer fas fa-map-pin"
               title="pinned"
-              onClick={() => setPinned((prev) => !prev)}
+              onClick={() =>
+                noteDispatch({ type: "PINNED", payload: noteState.pinned })
+              }
             ></i>
             <input
+              style={{ backgroundColor: noteState.color }}
               className="title"
               placeholder="Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={noteState.title}
+              onChange={(event) =>
+                noteDispatch({ type: "TITLE", payload: event.target.value })
+              }
             />
             <ReactQuill
+              style={{ backgroundColor: noteState.color }}
               placeholder="Take a note..."
               theme="snow"
               modules={quillModules}
-              value={text}
-              onChange={(e) => setText(e)}
+              value={noteState.text}
+              onChange={(event) =>
+                noteDispatch({ type: "TEXT", payload: event })
+              }
             />
             <section className="color-pallete">
-              <div
-                className="color-selector"
-                onClick={() => setColor("#f87171")}
-                style={{ backgroundColor: "#f87171" }}
-              ></div>
-              <div
-                className="color-selector"
-                onClick={() => setColor("#fb923c")}
-                style={{ backgroundColor: "#fb923c" }}
-              ></div>
-              <div
-                className="color-selector"
-                onClick={() => setColor("#facc15")}
-                style={{ backgroundColor: "#facc15" }}
-              ></div>
-              <div
-                className="color-selector"
-                onClick={() => setColor("#a3e635")}
-                style={{ backgroundColor: "#a3e635" }}
-              ></div>
-              <div
-                className="color-selector"
-                onClick={() => setColor("#5eead4")}
-                style={{ backgroundColor: "#5eead4" }}
-              ></div>
-              <div
-                className="color-selector"
-                onClick={() => setColor("#8b5cf6")}
-                style={{ backgroundColor: "#8b5cf6" }}
-              ></div>
-              <div
-                className="color-selector"
-                onClick={() => setColor("#ec4899")}
-                style={{ backgroundColor: "#ec4899" }}
-              ></div>
-              <div
-                className="color-selector"
-                onClick={() => setColor("#f43f5e")}
-                style={{ backgroundColor: "#f43f5e" }}
-              ></div>
+              {color.map((item,index) => (
+                <div
+                  className="cursor-pointer color-selector"
+                  key={index}
+                  onClick={() => noteDispatch({ type: "COLOR", payload: item })}
+                  style={{ backgroundColor: item }}
+                ></div>
+              ))}
             </section>
-            <button className="save-note" onClick={(e) => saveHandler(e)}>
+            <button
+              className="cursor-pointer save-note"
+              onClick={(event) => saveHandler(event)}
+            >
               Save note
             </button>
           </form>
 
           <div className="display-note">
-            <h3>Pinned</h3>
-            <NoteContainer title={title} text={text} color={color} />
-            <NoteContainer title={title} text={text} color={color} />
+            {pinnedArray.length !== 0 && <h3>Pinned</h3>}
+            {pinnedArray.map((pinnedItem, index) => (
+              <NoteContainer
+                key={index}
+                title={pinnedItem.title}
+                text={pinnedItem.text}
+                color={pinnedItem.color}
+                date={pinnedItem.date}
+                time={pinnedItem.time}
+              />
+            ))}
           </div>
 
           <div className="display-note">
-            <h3>Unpinned</h3>
-            <NoteContainer title={title} text={text} color={color} />
-            <NoteContainer title={title} text={text} color={color} />
+            {unPinnedArray.length !== 0 && <h3>Unpinned</h3>}
+            {unPinnedArray.map((unpinnedItem, index) => (
+              <NoteContainer
+                key={index}
+                title={unpinnedItem.title}
+                text={unpinnedItem.text}
+                color={unpinnedItem.color}
+                date={unpinnedItem.date}
+                time={unpinnedItem.time}
+              />
+            ))}
           </div>
         </main>
       </section>

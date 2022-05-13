@@ -1,22 +1,48 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import axios from "axios";
+import {
+  useReducer,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { noteArrayReducer } from "reducer";
+import { getSortedNote } from "utils";
 
 const NoteContext = createContext();
 
 const NoteProvider = ({ children }) => {
   const [noteData, setNoteData] = useState("");
   useEffect(() => {
+    const token = localStorage.getItem("token");
     (async () => {
       try {
-        const response = await axios.get("/api/notes");
-        console.log(response);
-        // noteData=response;
-        // setNoteData(noteData);
+        const response = await axios.get("/api/notes", {
+          headers: {
+            authorization: token,
+          },
+        });
+        const noteData = response.data.notes;
+        setNoteData(noteData);
       } catch (e) {
         console.log(e);
       }
     })();
-  },[]);
-  return <NoteContext.Provider value={{}}>{children}</NoteContext.Provider>;
+  }, []);
+
+  const [noteArrayState, noteArrayDispatch] = useReducer(noteArrayReducer, {
+    sortBy: "",
+  });
+
+  const sortedNote = getSortedNote(noteData, noteArrayState.sortBy);
+
+  return (
+    <NoteContext.Provider
+      value={{ sortedNote, setNoteData, noteArrayDispatch }}
+    >
+      {children}
+    </NoteContext.Provider>
+  );
 };
 
 const useNote = () => useContext(NoteContext);

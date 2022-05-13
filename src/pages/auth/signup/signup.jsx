@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./signup.css";
 import { useEffect } from "react";
-import { useSignup } from "../../../utils";
+import { useSignup } from "utils";
 
 export const Signup = () => {
   const { submitHandler, signUpDispatch, signUpState } = useSignup();

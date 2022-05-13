@@ -1,14 +1,33 @@
-.note-container,
 .note-container {
   display: inline-block;
 }
 
-.note-block,
+.note-container .note-title{
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
 .note-block {
   margin: 1rem;
   padding: 1rem;
   text-align: left;
-  width: 15rem;
-  height: 10rem;
+  width: 18rem;
   background-color: var(--white-section);
+}
+
+.footer-data {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.note-container .icons{
+  margin-top: .5rem;
+}
+
+.note-container .fa-tag,
+.note-container .fa-archive,
+.note-container .fa-trash {
+  margin: 0 0.5rem;
+  color: var(--default);
 }

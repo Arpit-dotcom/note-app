@@ -2,6 +2,7 @@
   width: 100%;
   background-color: var(--primary-color);
   position: sticky;
+  border-top: 1px solid var(--bg-color);
   top: 4.7rem;
   height: 40.3rem;
 }
@@ -29,4 +30,16 @@
   margin: 0;
   display: block;
   border: none !important;
+}
+
+.drawer .heading,
+.sort {
+  color: white;
+  display: block;
+  text-align: left;
+  margin: 1rem;
+}
+
+.sort {
+  font-size: 1.3rem;
 }
