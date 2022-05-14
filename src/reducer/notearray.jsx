@@ -1,9 +1,13 @@
+
 export const noteArrayReducer = (noteArrayState, noteArrayAction) => {
   switch (noteArrayAction.type) {
-    case "LATEST":
-      return { ...noteArrayState, sortBy: "Latest" };
-    case "OLD":
-      return { ...noteArrayState, sortBy: "Old" };
+    case "SORT_BY_TIME":
+      return { ...noteArrayState, sortBy: noteArrayAction.payload };
+    case "ADD_TO_ARCHIVE":
+      return {
+        ...noteArrayState,
+        archive: noteArrayAction.payload,
+      };
     default:
       return noteArrayState;
   }

@@ -32,13 +32,14 @@ const NoteProvider = ({ children }) => {
 
   const [noteArrayState, noteArrayDispatch] = useReducer(noteArrayReducer, {
     sortBy: "",
+    archive: [],
   });
 
   const sortedNote = getSortedNote(noteData, noteArrayState.sortBy);
 
   return (
     <NoteContext.Provider
-      value={{ sortedNote, setNoteData, noteArrayDispatch }}
+      value={{ sortedNote, setNoteData,noteArrayState, noteArrayDispatch }}
     >
       {children}
     </NoteContext.Provider>

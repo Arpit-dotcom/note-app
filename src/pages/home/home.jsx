@@ -4,13 +4,14 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useEffect, useReducer } from "react";
 import axios from "axios";
-import { useNote } from "context";
+import { useAuth, useNote } from "context";
 import { quillModules, color } from "staticdata";
 import { noteReducer } from "reducer";
 
 export const Home = () => {
   let myCurrentDateTime = new Date();
   const { sortedNote, setNoteData } = useNote();
+  const { token } = useAuth();
   const [noteState, noteDispatch] = useReducer(noteReducer, {
     title: "",
     text: "",
@@ -23,7 +24,6 @@ export const Home = () => {
   }, []);
 
   const saveHandler = async (e) => {
-    const token = localStorage.getItem("token");
     e.preventDefault();
     const note = {
       title: noteState.title,
@@ -58,8 +58,8 @@ export const Home = () => {
     (myCurrentDateTime.getMonth() + 1) +
     "/" +
     myCurrentDateTime.getFullYear();
-  
-    let currentTime =
+
+  let currentTime =
     myCurrentDateTime.getHours() +
     ":" +
     myCurrentDateTime.getMinutes() +
@@ -100,7 +100,7 @@ export const Home = () => {
               }
             />
             <section className="color-pallete">
-              {color.map((item,index) => (
+              {color.map((item, index) => (
                 <div
                   className="cursor-pointer color-selector"
                   key={index}
@@ -122,6 +122,7 @@ export const Home = () => {
             {pinnedArray.map((pinnedItem, index) => (
               <NoteContainer
                 key={index}
+                id={pinnedItem._id}
                 title={pinnedItem.title}
                 text={pinnedItem.text}
                 color={pinnedItem.color}
@@ -136,6 +137,7 @@ export const Home = () => {
             {unPinnedArray.map((unpinnedItem, index) => (
               <NoteContainer
                 key={index}
+                id={unpinnedItem._id}
                 title={unpinnedItem.title}
                 text={unpinnedItem.text}
                 color={unpinnedItem.color}

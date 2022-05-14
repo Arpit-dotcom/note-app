@@ -1,10 +1,9 @@
 import "../home/home.css";
-import { Navbar, NoteContainer, Sidebar } from "components";
+import { NoteContainer, Sidebar } from "components";
 
 export const Labels = () => {
   return (
     <>
-      <Navbar />
       <section className="home">
         <Sidebar />
         <NoteContainer />
