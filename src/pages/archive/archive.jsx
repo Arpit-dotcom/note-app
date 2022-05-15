@@ -4,7 +4,6 @@ import { useNote } from "context";
 
 export const Archive = () => {
   const { noteArrayState } = useNote();
-  console.log(noteArrayState.archive)
   return (
     <>
       <section className="home">

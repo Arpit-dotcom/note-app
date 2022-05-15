@@ -8,12 +8,9 @@ export const NoteContainer = ({ title, text, color, date, time, id }) => {
   const { noteArrayDispatch } = useNote();
   const { token } = useAuth();
 
-  console.log("out container",note);
-
   const archiveHandler = async (note) => {
-    console.log("in container",note)
     const response = await axios.post(
-      "/api/notes/archives/:noteId",
+      `/api/notes/archives/${id}`,
       { note },
       {
         headers: {
@@ -21,7 +18,10 @@ export const NoteContainer = ({ title, text, color, date, time, id }) => {
         },
       }
     );
-    console.log(response);
+    noteArrayDispatch({
+      type: "ADD_TO_ARCHIVE",
+      payload: response.data.archives,
+    });
   };
 
   return (

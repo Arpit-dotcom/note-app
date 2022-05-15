@@ -10,7 +10,7 @@ import { noteReducer } from "reducer";
 
 export const Home = () => {
   let myCurrentDateTime = new Date();
-  const { sortedNote, setNoteData } = useNote();
+  const { sortedNote, noteArrayDispatch } = useNote();
   const { token } = useAuth();
   const [noteState, noteDispatch] = useReducer(noteReducer, {
     title: "",
@@ -43,7 +43,7 @@ export const Home = () => {
           },
         }
       );
-      setNoteData(response.data.notes);
+      noteArrayDispatch({ type: "ADD_TO_NOTE", payload: response.data.notes });
       noteDispatch({ type: "RESET" });
     } catch (e) {
       console.log(e);
