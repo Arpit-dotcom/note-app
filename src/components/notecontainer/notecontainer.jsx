@@ -40,7 +40,21 @@ export const NoteContainer = ({ title, text, color, date, time, id }) => {
     }
   };
 
-  const removeArchiveNote = async (note) => {};
+  const removeArchiveNote = async () => {
+    try {
+      const response = await axios.post(
+        `/api/archives/restore/${id}`,
+        {},
+        {
+          headers: { authorization: token },
+        }
+      );
+      console.log(response);
+      noteArrayDispatch({ type: "UNARCHIVE", payload: response.data });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <section className="note-container">
