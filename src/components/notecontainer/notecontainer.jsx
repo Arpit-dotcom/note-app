@@ -2,27 +2,45 @@ import "./notecontainer.css";
 import parse from "html-react-parser";
 import { useAuth, useNote } from "context";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 export const NoteContainer = ({ title, text, color, date, time, id }) => {
+  const { pathname } = useLocation();
   const note = { title, text, color, date, time, id };
   const { noteArrayDispatch } = useNote();
   const { token } = useAuth();
 
-  const archiveHandler = async (note) => {
-    const response = await axios.post(
-      `/api/notes/archives/${id}`,
-      { note },
-      {
-        headers: {
-          authorization: token,
-        },
-      }
-    );
-    noteArrayDispatch({
-      type: "ADD_TO_ARCHIVE",
-      payload: response.data.archives,
-    });
+  const addArchiveNote = async (note) => {
+    try {
+      const response = await axios.post(
+        `/api/notes/archives/${id}`,
+        { note },
+        { headers: { authorization: token } }
+      );
+      noteArrayDispatch({
+        type: "ADD_TO_ARCHIVE",
+        payload: response.data,
+      });
+    } catch (e) {
+      console.log(e);
+    }
   };
+
+  const deleteArchiveNote = async () => {
+    try {
+      const response = await axios.delete(`/api/archives/delete/${id}`, {
+        headers: { authorization: token },
+      });
+      noteArrayDispatch({
+        type: "DELETE_FROM_ARCHIVE",
+        payload: response.data.archives,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const removeArchiveNote = async (note) => {};
 
   return (
     <section className="note-container">
@@ -35,12 +53,31 @@ export const NoteContainer = ({ title, text, color, date, time, id }) => {
             <p>{time}</p>
           </span>
           <span className="icons">
-            <i className="cursor-pointer fas fa-tag"></i>
-            <i
-              className="cursor-pointer fas fa-archive"
-              onClick={() => archiveHandler(note)}
-            ></i>
-            <i className="cursor-pointer fas fa-trash"></i>
+            {pathname === "/home" && (
+              <>
+                <i className="cursor-pointer fas fa-tag" title="label"></i>
+                <i
+                  className="cursor-pointer fas fa-archive"
+                  onClick={() => addArchiveNote(note)}
+                  title="unarchive"
+                ></i>
+                <i className="cursor-pointer fas fa-trash" title="delete"></i>
+              </>
+            )}
+            {pathname === "/archive" && (
+              <>
+                <i
+                  className="cursor-pointer fas fa-archive"
+                  title="unarchive"
+                  onClick={() => removeArchiveNote(note)}
+                ></i>
+                <i
+                  className="cursor-pointer fas fa-trash"
+                  title="delete"
+                  onClick={() => deleteArchiveNote()}
+                ></i>
+              </>
+            )}
           </span>
         </div>
       </div>

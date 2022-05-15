@@ -8,17 +8,19 @@ export const Archive = () => {
     <>
       <section className="home">
         <Sidebar />
-        {noteArrayState.archive.map((note, index) => (
-          <NoteContainer
-            key={index}
-            id={note._id}
-            title={note.title}
-            text={note.text}
-            color={note.color}
-            date={note.date}
-            time={note.time}
-          />
-        ))}
+        <main className="content">
+          {noteArrayState.archives.map((archive, index) => (
+            <NoteContainer
+              key={index}
+              id={archive._id}
+              title={archive.title}
+              text={archive.text}
+              color={archive.color}
+              date={archive.date}
+              time={archive.time}
+            />
+          ))}
+        </main>
       </section>
     </>
   );

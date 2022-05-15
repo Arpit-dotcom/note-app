@@ -7,7 +7,7 @@ const NoteContext = createContext();
 const NoteProvider = ({ children }) => {
   const [noteArrayState, noteArrayDispatch] = useReducer(noteArrayReducer, {
     sortBy: "",
-    archive: [],
+    archives: [],
     notes: [],
   });
 

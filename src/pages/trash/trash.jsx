@@ -6,7 +6,9 @@ export const Trash = () => {
     <>
       <section className="home">
         <Sidebar />
-        <NoteContainer />
+        <main className="content">
+          <NoteContainer />
+        </main>
       </section>
     </>
   );

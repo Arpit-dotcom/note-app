@@ -8,8 +8,13 @@ export const noteArrayReducer = (noteArrayState, noteArrayAction) => {
     case "ADD_TO_ARCHIVE":
       return {
         ...noteArrayState,
-        archive: noteArrayAction.payload,
+        notes: noteArrayAction.payload.notes,
+        archives: noteArrayAction.payload.archives,
       };
+      case "DELETE_FROM_ARCHIVE":
+        return {
+          ...noteArrayState, archives: noteArrayAction.payload
+        } 
     default:
       return noteArrayState;
   }
