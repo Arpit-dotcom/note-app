@@ -123,7 +123,7 @@ export const Home = () => {
               ({ _id, title, text, color, date, time }, index) => (
                 <NoteContainer
                   key={index}
-                  id={_id}
+                  _id={_id}
                   title={title}
                   text={text}
                   color={color}
@@ -140,7 +140,7 @@ export const Home = () => {
               ({ _id, title, text, color, date, time }, index) => (
                 <NoteContainer
                   key={index}
-                  id={_id}
+                  _id={_id}
                   title={title}
                   text={text}
                   color={color}
