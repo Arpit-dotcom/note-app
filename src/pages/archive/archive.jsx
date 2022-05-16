@@ -10,9 +10,9 @@ export const Archive = () => {
         <Sidebar />
         <main className="content">
           {noteArrayState.archives.map(
-            ({ _id, title, text, color, date, time }) => (
+            ({ _id, title, text, color, date, time }, index) => (
               <NoteContainer
-                key={_id}
+                key={index}
                 id={_id}
                 title={title}
                 text={text}

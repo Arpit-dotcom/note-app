@@ -73,7 +73,7 @@ export const NoteContainer = ({ title, text, color, date, time, id }) => {
                 <i
                   className="cursor-pointer fas fa-archive"
                   onClick={() => addArchiveNote(note)}
-                  title="unarchive"
+                  title="archive"
                 ></i>
                 <i className="cursor-pointer fas fa-trash" title="delete"></i>
               </>
