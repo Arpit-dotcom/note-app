@@ -28,7 +28,9 @@
 
 .note-container .fa-tag,
 .note-container .fa-archive,
-.note-container .fa-trash {
+.note-container .fa-trash,
+.note-container .fa-trash-alt,
+.note-container .fa-trash-restore {
   margin: 0 0.5rem;
   color: var(--default);
 }

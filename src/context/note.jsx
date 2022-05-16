@@ -9,6 +9,7 @@ const NoteProvider = ({ children }) => {
     sortBy: "",
     archives: [],
     notes: [],
+    trash: [],
   });
 
   const sortedNote = getSortedNote(noteArrayState.notes, noteArrayState.sortBy);

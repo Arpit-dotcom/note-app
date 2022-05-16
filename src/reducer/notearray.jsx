@@ -1,25 +1,42 @@
-export const noteArrayReducer = (noteArrayState, noteArrayAction) => {
-  switch (noteArrayAction.type) {
+export const noteArrayReducer = (noteArrayState, {type, payload}) => {
+  switch (type) {
     case "ADD_TO_NOTE":
-      return { ...noteArrayState, notes: noteArrayAction.payload };
+      return { ...noteArrayState, notes: payload };
     case "SORT_BY_TIME":
-      return { ...noteArrayState, sortBy: noteArrayAction.payload };
+      return { ...noteArrayState, sortBy: payload };
     case "ADD_TO_ARCHIVE":
       return {
         ...noteArrayState,
-        notes: noteArrayAction.payload.notes,
-        archives: noteArrayAction.payload.archives,
+        notes: payload.notes,
+        archives: payload.archives,
       };
     case "DELETE_FROM_ARCHIVE":
       return {
         ...noteArrayState,
-        archives: noteArrayAction.payload,
+        archives: payload,
       };
-    case "UNARCHIVE":
+    case "RESTORE_FROM_ARCHIVE":
       return {
         ...noteArrayState,
-        notes: noteArrayAction.payload.notes,
-        archives: noteArrayAction.payload.archives,
+        notes: payload.notes,
+        archives: payload.archives,
+      };
+    case "ADD_TO_TRASH":
+      return {
+        ...noteArrayState,
+        notes: payload.notes,
+        trash: payload.trash,
+      };
+    case "RESTORE_FROM_TRASH":
+      return {
+        ...noteArrayState,
+        notes: payload.notes,
+        trash: payload.trash,
+      };
+    case "DELETE_FROM_TRASH":
+      return {
+        ...noteArrayState,
+        trash: payload,
       };
     default:
       return noteArrayState;

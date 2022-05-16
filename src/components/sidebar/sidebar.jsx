@@ -8,7 +8,7 @@ export const Sidebar = () => {
     { icons: "fas fa-home", text: "Home", link: "/home" },
     { icons: "fas fa-tag", text: "Label", link: "/label" },
     { icons: "fas fa-archive", text: "Archive", link: "/archive" },
-    { icons: "fas fa-trash", text: "Trash", link: "/trash" },
+    { icons: "fas fa-trash-alt", text: "Trash", link: "/trash" },
   ];
 
   return (
