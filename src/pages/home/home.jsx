@@ -119,30 +119,30 @@ export const Home = () => {
 
           <div className="display-note">
             {pinnedArray.length !== 0 && <h3>Pinned</h3>}
-            {pinnedArray.map((pinnedItem, index) => (
+            {pinnedArray.map(({ _id, title, text, color, date, time }) => (
               <NoteContainer
-                key={index}
-                id={pinnedItem._id}
-                title={pinnedItem.title}
-                text={pinnedItem.text}
-                color={pinnedItem.color}
-                date={pinnedItem.date}
-                time={pinnedItem.time}
+                key={_id}
+                id={_id}
+                title={title}
+                text={text}
+                color={color}
+                date={date}
+                time={time}
               />
             ))}
           </div>
 
           <div className="display-note">
             {unPinnedArray.length !== 0 && <h3>Unpinned</h3>}
-            {unPinnedArray.map((unpinnedItem, index) => (
+            {unPinnedArray.map((_id, title, text, color, date, time) => (
               <NoteContainer
-                key={index}
-                id={unpinnedItem._id}
-                title={unpinnedItem.title}
-                text={unpinnedItem.text}
-                color={unpinnedItem.color}
-                date={unpinnedItem.date}
-                time={unpinnedItem.time}
+                key={_id}
+                id={_id}
+                title={title}
+                text={text}
+                color={color}
+                date={date}
+                time={time}
               />
             ))}
           </div>
