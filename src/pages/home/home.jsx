@@ -4,13 +4,14 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useEffect, useReducer } from "react";
 import axios from "axios";
-import { useNote } from "context";
+import { useAuth, useNote } from "context";
 import { quillModules, color } from "staticdata";
 import { noteReducer } from "reducer";
 
 export const Home = () => {
   let myCurrentDateTime = new Date();
-  const { sortedNote, setNoteData } = useNote();
+  const { sortedNote, noteArrayDispatch } = useNote();
+  const { token } = useAuth();
   const [noteState, noteDispatch] = useReducer(noteReducer, {
     title: "",
     text: "",
@@ -23,7 +24,6 @@ export const Home = () => {
   }, []);
 
   const saveHandler = async (e) => {
-    const token = localStorage.getItem("token");
     e.preventDefault();
     const note = {
       title: noteState.title,
@@ -43,7 +43,7 @@ export const Home = () => {
           },
         }
       );
-      setNoteData(response.data.notes);
+      noteArrayDispatch({ type: "ADD_TO_NOTE", payload: response.data.notes });
       noteDispatch({ type: "RESET" });
     } catch (e) {
       console.log(e);
@@ -58,8 +58,8 @@ export const Home = () => {
     (myCurrentDateTime.getMonth() + 1) +
     "/" +
     myCurrentDateTime.getFullYear();
-  
-    let currentTime =
+
+  let currentTime =
     myCurrentDateTime.getHours() +
     ":" +
     myCurrentDateTime.getMinutes() +
@@ -100,7 +100,7 @@ export const Home = () => {
               }
             />
             <section className="color-pallete">
-              {color.map((item,index) => (
+              {color.map((item, index) => (
                 <div
                   className="cursor-pointer color-selector"
                   key={index}
@@ -119,28 +119,30 @@ export const Home = () => {
 
           <div className="display-note">
             {pinnedArray.length !== 0 && <h3>Pinned</h3>}
-            {pinnedArray.map((pinnedItem, index) => (
+            {pinnedArray.map(({ _id, title, text, color, date, time }) => (
               <NoteContainer
-                key={index}
-                title={pinnedItem.title}
-                text={pinnedItem.text}
-                color={pinnedItem.color}
-                date={pinnedItem.date}
-                time={pinnedItem.time}
+                key={_id}
+                id={_id}
+                title={title}
+                text={text}
+                color={color}
+                date={date}
+                time={time}
               />
             ))}
           </div>
 
           <div className="display-note">
             {unPinnedArray.length !== 0 && <h3>Unpinned</h3>}
-            {unPinnedArray.map((unpinnedItem, index) => (
+            {unPinnedArray.map((_id, title, text, color, date, time) => (
               <NoteContainer
-                key={index}
-                title={unpinnedItem.title}
-                text={unpinnedItem.text}
-                color={unpinnedItem.color}
-                date={unpinnedItem.date}
-                time={unpinnedItem.time}
+                key={_id}
+                id={_id}
+                title={title}
+                text={text}
+                color={color}
+                date={date}
+                time={time}
               />
             ))}
           </div>

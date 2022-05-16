@@ -1,13 +1,28 @@
 import "../home/home.css";
-import { Navbar, NoteContainer, Sidebar } from "components";
+import { NoteContainer, Sidebar } from "components";
+import { useNote } from "context";
 
 export const Archive = () => {
+  const { noteArrayState } = useNote();
   return (
     <>
-      <Navbar />
       <section className="home">
         <Sidebar />
-        <NoteContainer />
+        <main className="content">
+          {noteArrayState.archives.map(
+            ({ _id, title, text, color, date, time }) => (
+              <NoteContainer
+                key={_id}
+                id={_id}
+                title={title}
+                text={text}
+                color={color}
+                date={date}
+                time={time}
+              />
+            )
+          )}
+        </main>
       </section>
     </>
   );

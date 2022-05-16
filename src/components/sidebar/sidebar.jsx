@@ -29,7 +29,7 @@ export const Sidebar = () => {
           className="cursor-pointer"
           type="radio"
           name="sort"
-          onClick={() => noteArrayDispatch({ type: "LATEST" })}
+          onClick={() => noteArrayDispatch({ type: "SORT_BY_TIME", payload: "Latest" })}
         />{" "}
         Latest
       </label>
@@ -38,7 +38,7 @@ export const Sidebar = () => {
           className="cursor-pointer"
           type="radio"
           name="sort"
-          onClick={() => noteArrayDispatch({ type: "OLD" })}
+          onClick={() => noteArrayDispatch({ type: "SORT_BY_TIME", payload: "Old" })}
         />{" "}
         Old
       </label>
