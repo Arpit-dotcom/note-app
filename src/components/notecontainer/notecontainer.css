@@ -2,7 +2,7 @@
   display: inline-block;
 }
 
-.note-container .note-title{
+.note-container .note-title {
   font-size: 1.3rem;
   font-weight: bold;
 }
@@ -22,8 +22,20 @@
   margin-top: 1rem;
 }
 
-.note-container .icons{
+.note-container .note-tags{
   margin-top: .5rem;
+}
+
+.note-container .tags {
+  background-color: var(--default);
+  color: var(--white-section);
+  border-radius: 5px;
+  margin: 0 0.2rem;
+  padding: 0.1rem 0.2rem;
+}
+
+.note-container .icons {
+  margin-top: 0.5rem;
 }
 
 .note-container .fa-tag,

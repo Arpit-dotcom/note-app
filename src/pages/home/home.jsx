@@ -7,9 +7,14 @@ import axios from "axios";
 import { useAuth, useNote } from "context";
 import { quillModules, color } from "staticdata";
 import { noteReducer } from "reducer";
+import { useState } from "react";
+import { isNewTag } from "utils";
+import { AiOutlineClose } from "react-icons/ai";
 
+const tags = ["Office", "Personal", "Home", "Bills", "EMIs"];
 export const Home = () => {
   let myCurrentDateTime = new Date();
+  const [showTags, setShowTags] = useState(false);
   const { sortedNote, noteArrayDispatch } = useNote();
   const { token } = useAuth();
   const [noteState, noteDispatch] = useReducer(noteReducer, {
@@ -17,6 +22,7 @@ export const Home = () => {
     text: "",
     color: "",
     pinned: false,
+    tags: [],
   });
 
   useEffect(() => {
@@ -30,6 +36,7 @@ export const Home = () => {
       text: noteState.text,
       color: noteState.color,
       pinned: noteState.pinned,
+      tags: noteState.tags,
       date: currentDate,
       time: currentTime,
     };
@@ -47,6 +54,22 @@ export const Home = () => {
       noteDispatch({ type: "RESET" });
     } catch (e) {
       console.log(e);
+    }
+  };
+
+  const tagsPopup = () => {
+    setShowTags((prev) => !prev);
+  };
+
+  const addTag = (tag) => {
+    const newTag = isNewTag(noteState.tags, tag);
+    if (!newTag) {
+      noteDispatch({
+        type: "ADD_TAG",
+        payload: tag,
+      });
+    } else {
+      console.log("Tag is already present");
     }
   };
 
@@ -99,6 +122,35 @@ export const Home = () => {
                 noteDispatch({ type: "TEXT", payload: event })
               }
             />
+            <div
+              style={{ backgroundColor: noteState.color }}
+              className="cursor-pointer tag-container"
+              onClick={() => tagsPopup()}
+            >
+              {noteState.tags.length !== 0 ? (
+                noteState.tags.map((tag, index) => (
+                  <span className="tag" key={index}>
+                    {tag}
+                  </span>
+                ))
+              ) : (
+                <span>Add tags</span>
+              )}
+            </div>
+            {showTags && (
+              <section name="tags" className="select">
+                <AiOutlineClose className="cursor-pointer close" onClick={() => tagsPopup()} />
+                {tags.map((tag, index) => (
+                  <div
+                    key={index}
+                    className="cursor-pointer options"
+                    onClick={() => addTag(tag)}
+                  >
+                    {tag}
+                  </div>
+                ))}
+              </section>
+            )}
             <section className="color-pallete">
               {color.map((item, index) => (
                 <div
@@ -120,12 +172,13 @@ export const Home = () => {
           <div className="display-note">
             {pinnedArray.length !== 0 && <h3>Pinned</h3>}
             {pinnedArray.map(
-              ({ _id, title, text, color, date, time }, index) => (
+              ({ _id, title, text, tags, color, date, time }, index) => (
                 <NoteContainer
                   key={index}
                   _id={_id}
                   title={title}
                   text={text}
+                  tags={tags}
                   color={color}
                   date={date}
                   time={time}
@@ -137,12 +190,13 @@ export const Home = () => {
           <div className="display-note">
             {unPinnedArray.length !== 0 && <h3>Unpinned</h3>}
             {unPinnedArray.map(
-              ({ _id, title, text, color, date, time }, index) => (
+              ({ _id, title, text, tags, color, date, time }, index) => (
                 <NoteContainer
                   key={index}
                   _id={_id}
                   title={title}
                   text={text}
+                  tags={tags}
                   color={color}
                   date={date}
                   time={time}

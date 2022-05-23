@@ -8,11 +8,14 @@ export const noteReducer = (noteState, noteAction) => {
       return { ...noteState, color: noteAction.payload };
     case "PINNED":
       return { ...noteState, pinned: !noteAction.payload };
+    case "ADD_TAG":
+      return { ...noteState, tags: [...noteState.tags, noteAction.payload] };
     case "RESET":
       return {
         title: "",
         text: "",
         color: "",
+        tags: [],
         pinned: false,
       };
     default:

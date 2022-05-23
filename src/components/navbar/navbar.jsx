@@ -10,11 +10,11 @@ export const Navbar = () =>{
           <h1 className="text">Note App</h1>
         </span>
 
-        <input
+        {/* <input
           className="nav-search"
           type="text"
-          placeholder="Search for product, brands and more"
-        />
+          placeholder="Search for note"
+        /> */}
 
         <div className="nav-list">
           <div className="list-item icons">

@@ -10,12 +10,13 @@ export const Archive = () => {
         <Sidebar />
         <main className="content">
           {noteArrayState.archives.map(
-            ({ _id, title, text, color, date, time }, index) => (
+            ({ _id, title, tags, text, color, date, time }, index) => (
               <NoteContainer
                 key={index}
                 _id={_id}
                 title={title}
                 text={text}
+                tags={tags}
                 color={color}
                 date={date}
                 time={time}

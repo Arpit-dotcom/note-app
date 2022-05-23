@@ -10,12 +10,13 @@ export const Trash = () => {
         <Sidebar />
         <main className="content">
           {noteArrayState.trash.map(
-            ({ _id, title, text, color, date, time }, index) => (
+            ({ _id, title, text, tags, color, date, time }, index) => (
               <NoteContainer
                 key={index}
                 _id={_id}
                 title={title}
                 text={text}
+                tags={tags}
                 color={color}
                 date={date}
                 time={time}
