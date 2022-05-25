@@ -9,13 +9,15 @@ export const Labels = () => {
   const [filterTags, setFilterTags] = useState([]);
 
   const getFilterByTags = (tag) => {
-    console.log(tag);
+    // console.log(tag);
     setFilterTags(
-      noteArrayState.notes.filter((note) => note.tags.filter(noteTag => noteTag === tag))
+      noteArrayState.notes.filter(({ tags }) =>
+        tags.some((item) => tag.includes(item))
+      )
     );
   };
 
-  console.log(filterTags);
+  // console.log(filterTags);
 
   return (
     <>
@@ -23,8 +25,9 @@ export const Labels = () => {
         <Sidebar />
         <main className="content">
           <ul className="tags-list">
-            {tags.map((tag) => (
+            {tags.map((tag, index) => (
               <li
+                key={index}
                 className="cursor-pointer tags-item"
                 onClick={() => getFilterByTags(tag)}
               >
@@ -32,7 +35,7 @@ export const Labels = () => {
               </li>
             ))}
           </ul>
-          {filterTags.map(
+          {filterTags.length > 0 ? filterTags.map(
             ({ _id, title, text, tags, color, date, time }, index) => (
               <NoteContainer
                 key={index}
@@ -45,7 +48,7 @@ export const Labels = () => {
                 time={time}
               />
             )
-          )}
+          ) : <h2 className="tags-empty">No notes with you yet</h2>}
         </main>
       </section>
     </>

@@ -124,3 +124,8 @@
   margin: 0.5rem 1rem;
   border-radius: 5px;
 }
+
+.tags-empty{
+  text-align: center;
+  margin-top: 3rem;
+}
