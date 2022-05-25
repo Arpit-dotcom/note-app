@@ -9,15 +9,12 @@ export const Labels = () => {
   const [filterTags, setFilterTags] = useState([]);
 
   const getFilterByTags = (tag) => {
-    // console.log(tag);
     setFilterTags(
       noteArrayState.notes.filter(({ tags }) =>
         tags.some((item) => tag.includes(item))
       )
     );
   };
-
-  // console.log(filterTags);
 
   return (
     <>
