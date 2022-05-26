@@ -9,18 +9,23 @@ export const Archive = () => {
       <section className="home">
         <Sidebar />
         <main className="content">
-          {noteArrayState.archives.map(
-            ({ _id, title, text, color, date, time }, index) => (
-              <NoteContainer
-                key={index}
-                _id={_id}
-                title={title}
-                text={text}
-                color={color}
-                date={date}
-                time={time}
-              />
+          {noteArrayState.archives.length > 0 ? (
+            noteArrayState.archives.map(
+              ({ _id, title, tags, text, color, date, time }) => (
+                <NoteContainer
+                  key={_id}
+                  _id={_id}
+                  title={title}
+                  text={text}
+                  tags={tags}
+                  color={color}
+                  date={date}
+                  time={time}
+                />
+              )
             )
+          ) : (
+            <h2 className="tags-empty">No archive notes with you yet</h2>
           )}
         </main>
       </section>

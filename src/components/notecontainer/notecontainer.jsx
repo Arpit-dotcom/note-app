@@ -4,9 +4,19 @@ import { useAuth, useNote } from "context";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 
-export const NoteContainer = ({ title, text, color, date, time, _id }) => {
+export const NoteContainer = ({
+  title,
+  text,
+  tags,
+  color,
+  date,
+  time,
+  _id,
+  setShowEditContainer,
+  setNoteId,
+}) => {
   const { pathname } = useLocation();
-  const note = { title, text, color, date, time, _id };
+  const note = { title, text, tags, color, date, time, _id };
   const { noteArrayDispatch } = useNote();
   const { token } = useAuth();
 
@@ -49,7 +59,10 @@ export const NoteContainer = ({ title, text, color, date, time, _id }) => {
           headers: { authorization: token },
         }
       );
-      noteArrayDispatch({ type: "RESTORE_FROM_ARCHIVE", payload: response.data });
+      noteArrayDispatch({
+        type: "RESTORE_FROM_ARCHIVE",
+        payload: response.data,
+      });
     } catch (e) {
       console.log(e);
     }
@@ -70,36 +83,33 @@ export const NoteContainer = ({ title, text, color, date, time, _id }) => {
     }
   };
 
-  const restoreTrashNote = async() => {
-     try {
-       const response = await axios.post(
-         `/api/trash/restore/${_id}`,
-         {},
-         {
-           headers: { authorization: token },
-         }
-       );
-       noteArrayDispatch({ type: "RESTORE_FROM_TRASH", payload: response.data });
-     } catch (e) {
-       console.log(e);
-     }
+  const restoreTrashNote = async () => {
+    try {
+      const response = await axios.post(
+        `/api/trash/restore/${_id}`,
+        {},
+        {
+          headers: { authorization: token },
+        }
+      );
+      noteArrayDispatch({ type: "RESTORE_FROM_TRASH", payload: response.data });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
-  const deleteTrashNote = async() => {
-     try {
-       const response = await axios.delete(
-         `/api/trash/delete/${_id}`,
-         {
-           headers: { authorization: token },
-         }
-       );
-       noteArrayDispatch({
-         type: "DELETE_FROM_TRASH",
-         payload: response.data.trash,
-       });
-     } catch (e) {
-       console.log(e);
-     }
+  const deleteTrashNote = async () => {
+    try {
+      const response = await axios.delete(`/api/trash/delete/${_id}`, {
+        headers: { authorization: token },
+      });
+      noteArrayDispatch({
+        type: "DELETE_FROM_TRASH",
+        payload: response.data.trash,
+      });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -107,6 +117,13 @@ export const NoteContainer = ({ title, text, color, date, time, _id }) => {
       <div className="note-block" style={{ backgroundColor: color }}>
         <span className="note-title">{title}</span>
         <span className="note-text">​{parse(`${text}`)}</span>
+        <div className="note-tags">
+          {tags?.map((tag, index) => (
+            <span className="tags" key={index}>
+              {tag}
+            </span>
+          ))}
+        </div>
         <div className="footer-data">
           <span className="text">
             <p>{date}</p>
@@ -115,7 +132,14 @@ export const NoteContainer = ({ title, text, color, date, time, _id }) => {
           <span className="icons">
             {pathname === "/home" && (
               <>
-                <i className="cursor-pointer fas fa-tag" title="label"></i>
+                <i
+                  className="cursor-pointer fas fa-pen"
+                  title="edit"
+                  onClick={() => {
+                    setShowEditContainer(true);
+                    setNoteId(_id);
+                  }}
+                ></i>
                 <i
                   className="cursor-pointer fas fa-archive"
                   onClick={() => addArchiveNote(note)}
@@ -137,7 +161,7 @@ export const NoteContainer = ({ title, text, color, date, time, _id }) => {
                 ></i>
                 <i
                   className="cursor-pointer fas fa-trash"
-                  title="delete"
+                  title="delete permanently"
                   onClick={() => deleteArchiveNote()}
                 ></i>
               </>
@@ -151,7 +175,7 @@ export const NoteContainer = ({ title, text, color, date, time, _id }) => {
                 ></i>
                 <i
                   className="cursor-pointer fas fa-trash"
-                  title="delete"
+                  title="delete permanently"
                   onClick={() => deleteTrashNote()}
                 ></i>
               </>

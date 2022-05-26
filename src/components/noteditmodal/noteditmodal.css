@@ -1,25 +1,32 @@
-.home {
+.edit-container {
+  z-index: 25;
+  background-color: var(--bg-color);
+  width: 100%;
+  height: 100%;
+}
+
+.edit-container .home {
   display: grid;
   grid-template-columns: 1fr 5fr;
   background-color: var(--bg-color);
 }
 
-.fa-map-pin {
+.edit-container .fa-map-pin {
   position: absolute;
   right: 10px;
   top: 10px;
 }
 
-.content {
+.edit-container .content {
   padding: 1rem;
   width: 100%;
   min-height: 40.3rem;
 }
-.fa-sort {
+.edit-container .fa-sort {
   margin-left: 1rem;
 }
 
-.save-note {
+.edit-container .save-note {
   width: 6rem;
   padding: 0.5rem;
   margin-top: 1rem;
@@ -27,16 +34,16 @@
   background-color: var(--white-section);
 }
 
-.quill {
+.edit-container .quill {
   background-color: var(--white-section);
 }
 
-.color-pallete {
+.edit-container .color-pallete {
   display: flex;
   margin-top: 1rem;
 }
 
-.color-selector {
+.edit-container .color-selector {
   margin-right: 1rem;
   border-radius: 50%;
   width: 3rem;
@@ -44,7 +51,7 @@
   border: 1px solid black;
 }
 
-.add-note {
+.edit-container .add-note {
   position: relative;
   display: flex;
   justify-content: center;
@@ -53,29 +60,29 @@
   margin: auto;
 }
 
-.ql-toolbar.ql-snow {
+.edit-container .ql-toolbar.ql-snow {
   text-align: left;
 }
 
-.title {
+.edit-container .title {
   font-size: 1.3rem;
   font-weight: bold;
 }
 
-.title,
-.text-area,
-.tag-container,
-.select,
-.select .options {
+.edit-container .title,
+.edit-container .text-area,
+.edit-container .tag-container,
+.edit-container .select,
+.edit-container .select .options {
   padding: 0.5rem;
 }
 
-.tag-container {
+.edit-container .tag-container {
   background-color: var(--white-section);
   min-height: 2.2rem;
 }
 
-.tag {
+.edit-container .tag {
   background-color: var(--default);
   color: var(--white-section);
   border-radius: 5px;
@@ -83,7 +90,7 @@
   padding: 0.1rem 0.2rem;
 }
 
-.select {
+.edit-container .select {
   position: relative;
   background-color: var(--white-section);
   border: 1px solid var(--default);
@@ -92,32 +99,32 @@
   top: 17.6rem;
 }
 
-.select .close {
+.edit-container .select .close {
   position: absolute;
   top: 1rem;
   right: 1rem;
 }
 
-.display-note {
+.edit-container .display-note {
   text-align: left;
   margin: 1rem;
 }
 
-.display-note > h3 {
+.edit-container .display-note > h3 {
   margin-bottom: 1rem;
 }
 
-.text-area {
+.edit-container .text-area {
   resize: none;
 }
 
-.tags-list {
+.edit-container .tags-list {
   list-style: none;
   display: flex;
   justify-content: center;
 }
 
-.tags-item {
+.edit-container .tags-item {
   background-color: var(--primary-color);
   color: var(--white-section);
   padding: 0.2rem 0.5rem;
@@ -125,7 +132,7 @@
   border-radius: 5px;
 }
 
-.tags-empty{
+.edit-container .tags-empty {
   text-align: center;
   margin-top: 3rem;
 }
