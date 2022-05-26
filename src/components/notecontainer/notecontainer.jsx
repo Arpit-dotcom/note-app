@@ -12,6 +12,8 @@ export const NoteContainer = ({
   date,
   time,
   _id,
+  setShowEditContainer,
+  setNoteId,
 }) => {
   const { pathname } = useLocation();
   const note = { title, text, tags, color, date, time, _id };
@@ -130,6 +132,14 @@ export const NoteContainer = ({
           <span className="icons">
             {pathname === "/home" && (
               <>
+                <i
+                  className="cursor-pointer fas fa-pen"
+                  title="edit"
+                  onClick={() => {
+                    setShowEditContainer(true);
+                    setNoteId(_id);
+                  }}
+                ></i>
                 <i
                   className="cursor-pointer fas fa-archive"
                   onClick={() => addArchiveNote(note)}

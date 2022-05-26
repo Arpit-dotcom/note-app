@@ -38,6 +38,8 @@ export const noteArrayReducer = (noteArrayState, {type, payload}) => {
         ...noteArrayState,
         trash: payload,
       };
+      case "UPDATE_NOTES":
+        return {...noteArrayState,notes: payload}
     default:
       return noteArrayState;
   }

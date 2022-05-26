@@ -1,4 +1,4 @@
-import { NoteContainer, Sidebar } from "components";
+import { NoteContainer, NoteEditModal, Sidebar } from "components";
 import "./home.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -14,6 +14,8 @@ import { AiOutlineClose } from "react-icons/ai";
 const tags = ["Office", "Personal", "Home", "Bills", "EMIs"];
 export const Home = () => {
   let myCurrentDateTime = new Date();
+  const [showEditContainer, setShowEditContainer] = useState(false);
+  const [noteId, setNoteId] = useState("");
   const [showTags, setShowTags] = useState(false);
   const { sortedNote, noteArrayDispatch } = useNote();
   const { token } = useAuth();
@@ -95,6 +97,18 @@ export const Home = () => {
         <Sidebar />
 
         <main className="content">
+          {showEditContainer && (
+            <NoteEditModal
+              noteState={noteState}
+              noteDispatch={noteDispatch}
+              noteId={noteId}
+              showTags={showTags}
+              setShowTags={setShowTags}
+              tags={tags}
+              setShowEditContainer={setShowEditContainer}
+              token={token}
+            />
+          )}
           <form className="add-note">
             <i
               className="cursor-pointer fas fa-map-pin"
@@ -139,7 +153,10 @@ export const Home = () => {
             </div>
             {showTags && (
               <section name="tags" className="select">
-                <AiOutlineClose className="cursor-pointer close" onClick={() => tagsPopup()} />
+                <AiOutlineClose
+                  className="cursor-pointer close"
+                  onClick={() => tagsPopup()}
+                />
                 {tags.map((tag, index) => (
                   <div
                     key={index}
@@ -182,6 +199,8 @@ export const Home = () => {
                   color={color}
                   date={date}
                   time={time}
+                  setShowEditContainer={setShowEditContainer}
+                  setNoteId={setNoteId}
                 />
               )
             )}
@@ -200,6 +219,8 @@ export const Home = () => {
                   color={color}
                   date={date}
                   time={time}
+                  setShowEditContainer={setShowEditContainer}
+                  setNoteId={setNoteId}
                 />
               )
             )}

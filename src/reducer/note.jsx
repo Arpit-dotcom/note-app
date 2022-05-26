@@ -18,6 +18,14 @@ export const noteReducer = (noteState, noteAction) => {
         tags: [],
         pinned: false,
       };
+      case "SET_NOTE_BEFORE_EDIT":
+        return {
+          title: noteAction.payload.title,
+          text: noteAction.payload.text,
+          color: noteAction.payload.color,
+          tags: noteAction.payload.tags,
+          pinned: noteAction.payload.pinned,
+        };
     default:
       noteState;
   }
