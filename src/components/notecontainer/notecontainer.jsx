@@ -161,7 +161,7 @@ export const NoteContainer = ({
                 ></i>
                 <i
                   className="cursor-pointer fas fa-trash"
-                  title="delete"
+                  title="delete permanently"
                   onClick={() => deleteArchiveNote()}
                 ></i>
               </>
@@ -175,7 +175,7 @@ export const NoteContainer = ({
                 ></i>
                 <i
                   className="cursor-pointer fas fa-trash"
-                  title="delete"
+                  title="delete permanently"
                   onClick={() => deleteTrashNote()}
                 ></i>
               </>

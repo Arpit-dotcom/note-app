@@ -32,10 +32,10 @@ export const Labels = () => {
               </li>
             ))}
           </ul>
-          {filterTags.length > 0 ? filterTags.map(
-            ({ _id, title, text, tags, color, date, time }, index) => (
+          {filterTags.length > 0 ? (
+            filterTags.map(({ _id, title, text, tags, color, date, time }) => (
               <NoteContainer
-                key={index}
+                key={_id}
                 _id={_id}
                 title={title}
                 text={text}
@@ -44,8 +44,10 @@ export const Labels = () => {
                 date={date}
                 time={time}
               />
-            )
-          ) : <h2 className="tags-empty">No notes with you yet</h2>}
+            ))
+          ) : (
+            <h2 className="tags-empty">No notes with you yet</h2>
+          )}
         </main>
       </section>
     </>
