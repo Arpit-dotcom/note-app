@@ -27,10 +27,6 @@ export const Home = () => {
     tags: [],
   });
 
-  useEffect(() => {
-    document.title = "Note App | Home";
-  }, []);
-
   const saveHandler = async (e) => {
     e.preventDefault();
     const note = {
@@ -109,7 +105,7 @@ export const Home = () => {
               token={token}
             />
           )}
-          <form className="add-note">
+          <form className="add-note" onSubmit={(event) => saveHandler(event)}>
             <i
               className="cursor-pointer fas fa-map-pin"
               title="pinned"
@@ -125,6 +121,7 @@ export const Home = () => {
               onChange={(event) =>
                 noteDispatch({ type: "TITLE", payload: event.target.value })
               }
+              required
             />
             <ReactQuill
               style={{ backgroundColor: noteState.color }}
@@ -135,6 +132,7 @@ export const Home = () => {
               onChange={(event) =>
                 noteDispatch({ type: "TEXT", payload: event })
               }
+              required
             />
             <div
               style={{ backgroundColor: noteState.color }}
@@ -178,12 +176,7 @@ export const Home = () => {
                 ></div>
               ))}
             </section>
-            <button
-              className="cursor-pointer save-note"
-              onClick={(event) => saveHandler(event)}
-            >
-              Save note
-            </button>
+            <button className="cursor-pointer save-note">Save note</button>
           </form>
 
           <div className="display-note">

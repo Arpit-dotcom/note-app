@@ -6,10 +6,6 @@ import { useSignup } from "utils";
 export const Signup = () => {
   const { submitHandler, signUpDispatch, signUpState } = useSignup();
 
-  useEffect(() => {
-    document.title = "Signup | Shopzila";
-  }, []);
-
   return (
     <section className="signupContainer">
       <div className="heading">

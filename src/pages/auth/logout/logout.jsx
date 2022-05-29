@@ -5,10 +5,6 @@ import { useLogout } from "utils";
 export const Logout = () => {
   const { notLogOutHandler, logOutHandler } = useLogout();
 
-  useEffect(() => {
-    document.title = "Logout | Laugh Factory";
-  }, []);
-
   return (
     <section className="logoutContainer">
       <div className="heading">
