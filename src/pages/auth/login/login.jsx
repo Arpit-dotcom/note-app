@@ -13,10 +13,6 @@ export const Login = () => {
     setPassword,
   } = useLogin();
 
-  useEffect(() => {
-    document.title = "Login | Laugh Factory";
-  }, []);
-
   return (
     <section className="loginContainer">
       <div className="heading">
