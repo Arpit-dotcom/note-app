@@ -71,6 +71,13 @@ export const Home = () => {
     }
   };
 
+  const deleteTag = (tag) => {
+    noteDispatch({
+      type: "DELETE_TAG",
+      payload: tag,
+    });
+  };
+
   const pinnedArray = sortedNote.filter((note) => note.pinned);
   const unPinnedArray = sortedNote.filter((note) => !note.pinned);
   let currentDate =
@@ -132,17 +139,20 @@ export const Home = () => {
               onChange={(event) =>
                 noteDispatch({ type: "TEXT", payload: event })
               }
-              required
             />
             <div
               style={{ backgroundColor: noteState.color }}
               className="cursor-pointer tag-container"
               onClick={() => tagsPopup()}
             >
-              {noteState.tags.length !== 0 ? (
+              {noteState.tags.length ? (
                 noteState.tags.map((tag, index) => (
                   <span className="tag" key={index}>
                     {tag}
+                    <i
+                      className="fas fa-times"
+                      onClick={() => deleteTag(tag)}
+                    ></i>
                   </span>
                 ))
               ) : (

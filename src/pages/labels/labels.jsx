@@ -25,7 +25,7 @@ export const Labels = () => {
             {tags.map((tag, index) => (
               <li
                 key={index}
-                className="cursor-pointer tags-item"
+                className={`cursor-pointer tags-item`}
                 onClick={() => getFilterByTags(tag)}
               >
                 {tag}

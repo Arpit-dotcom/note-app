@@ -29,6 +29,13 @@ export const NoteEditModal = ({
     setShowTags((prev) => !prev);
   };
 
+  const deleteTag = (tag) => {
+    noteDispatch({
+      type: "DELETE_TAG",
+      payload: tag,
+    });
+  };
+
   const updateHandler = async (e) => {
     e.preventDefault();
     const response = await axios.post(
@@ -81,6 +88,7 @@ export const NoteEditModal = ({
             noteState.tags.map((tag, index) => (
               <span className="tag" key={index}>
                 {tag}
+                <i className="fas fa-times" onClick={() => deleteTag(tag)}></i>
               </span>
             ))
           ) : (

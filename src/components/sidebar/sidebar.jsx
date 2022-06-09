@@ -1,5 +1,5 @@
 import { useNote } from "context";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./sidebar.css";
 
 export const Sidebar = () => {
@@ -11,15 +11,23 @@ export const Sidebar = () => {
     { icons: "fas fa-trash-alt", text: "Trash", link: "/trash" },
   ];
 
+  const activeStyle = {
+    textDecoration: "underline",
+  };
+
   return (
     <aside className="drawer">
       <ul className="sub-drawer stacked-list">
         {categories.map((category, index) => (
           <li className="list-item" key={index}>
-            <Link className="link" to={category.link}>
+            <NavLink
+              className="link"
+              to={category.link}
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
               <i className={category.icons}></i>
               <span>{category.text}</span>
-            </Link>
+            </NavLink>
           </li>
         ))}
       </ul>
@@ -29,7 +37,9 @@ export const Sidebar = () => {
           className="cursor-pointer"
           type="radio"
           name="sort"
-          onClick={() => noteArrayDispatch({ type: "SORT_BY_TIME", payload: "Latest" })}
+          onClick={() =>
+            noteArrayDispatch({ type: "SORT_BY_TIME", payload: "Latest" })
+          }
         />{" "}
         Latest
       </label>
@@ -38,7 +48,9 @@ export const Sidebar = () => {
           className="cursor-pointer"
           type="radio"
           name="sort"
-          onClick={() => noteArrayDispatch({ type: "SORT_BY_TIME", payload: "Old" })}
+          onClick={() =>
+            noteArrayDispatch({ type: "SORT_BY_TIME", payload: "Old" })
+          }
         />{" "}
         Old
       </label>
