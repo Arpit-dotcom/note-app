@@ -1,9 +1,8 @@
-import { useNote } from "context";
+import { Sort } from "components";
 import { NavLink } from "react-router-dom";
 import "./sidebar.css";
 
 export const Sidebar = () => {
-  const { noteArrayDispatch } = useNote();
   const categories = [
     { icons: "fas fa-home", text: "Home", link: "/home" },
     { icons: "fas fa-tag", text: "Label", link: "/label" },
@@ -31,29 +30,7 @@ export const Sidebar = () => {
           </li>
         ))}
       </ul>
-      <h2 className="heading">Sort By Time</h2>
-      <label className="sort">
-        <input
-          className="cursor-pointer"
-          type="radio"
-          name="sort"
-          onClick={() =>
-            noteArrayDispatch({ type: "SORT_BY_TIME", payload: "Latest" })
-          }
-        />{" "}
-        Latest
-      </label>
-      <label className="sort">
-        <input
-          className="cursor-pointer"
-          type="radio"
-          name="sort"
-          onClick={() =>
-            noteArrayDispatch({ type: "SORT_BY_TIME", payload: "Old" })
-          }
-        />{" "}
-        Old
-      </label>
+      <Sort />
     </aside>
   );
 };

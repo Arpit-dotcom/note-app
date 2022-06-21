@@ -8,7 +8,7 @@
   margin-bottom: 2rem;
   padding: 2rem;
   background-color: var(--secondary-color);
-  width: 25rem;
+  width: 20rem;
   height: 67.5vh;
   border: 1px solid var(--default);
 }
@@ -32,8 +32,8 @@
   border-radius: 1rem;
   border: 1px solid var(--default);
   width: 100%;
-  background-color: var(--bg-color);
-  color: var(--secondary-color);
+  background-color: var(--primary-color);
+  color: var(--white-section);
   cursor: pointer;
   text-decoration: none;
   margin: 0.5rem 0;

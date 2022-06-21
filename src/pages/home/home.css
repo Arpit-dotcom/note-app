@@ -36,15 +36,21 @@
 }
 
 .color-pallete {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background-color: var(--blur);
+  border-radius: 1rem;
   display: flex;
   margin-top: 1rem;
+  padding: 0.5rem;
 }
 
 .color-selector {
   margin-right: 1rem;
   border-radius: 50%;
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
   border: 1px solid black;
 }
 
@@ -66,12 +72,24 @@
   font-weight: bold;
 }
 
+.color-pallete-icon {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 3rem;
+  margin: 1rem;
+  cursor: pointer;
+}
+
 .title,
 .text-area,
 .tag-container,
 .select,
 .select .options {
   padding: 0.5rem;
+}
+
+.select .options:hover {
+  background-color: var(--bg-color);
 }
 
 .tag-container {
@@ -88,18 +106,18 @@
 }
 
 .select {
-  position: relative;
+  position: absolute;
   background-color: var(--white-section);
   border: 1px solid var(--default);
   width: 10rem;
-  position: fixed;
-  top: 17.6rem;
+  top: 12rem;
 }
 
 .select .close {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  margin: 1rem;
+  right: 0;
+  top: 0;
 }
 
 .display-note {
@@ -137,4 +155,47 @@
 .trash-header,
 .archive-header {
   text-align: center;
+}
+
+.sort-modal {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 4rem;
+  background-color: var(--primary-color);
+  font-size: 1.5rem;
+  color: var(--white-section);
+  cursor: pointer;
+  display: none;
+}
+
+.mobile-sort {
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 15;
+  background-color: var(--blur);
+}
+
+.mobile-sort-container {
+  padding: 1rem;
+  position: fixed;
+  bottom: 0;
+  background-color: var(--white-section);
+  width: 100%;
+}
+
+.mobile-sort-container .sort {
+  color: var(--default);
+}
+
+.mobile-sort-container .close {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  cursor: pointer;
 }

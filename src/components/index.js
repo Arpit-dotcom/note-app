@@ -3,3 +3,7 @@ export { Navbar } from "./navbar/navbar";
 export { Sidebar } from "./sidebar/sidebar";
 export { NoteContainer } from "./notecontainer/notecontainer";
 export { NoteEditModal } from "./noteditmodal/noteditmodal";
+export { NoteModal } from "./notemodal/notemodal";
+export { MobileSidebar } from "./mobilesidebar/mobilesidebar";
+export { Sort } from "./sort/sort";
+export { MobileSort } from "./sort/mobilesort";

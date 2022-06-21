@@ -8,10 +8,15 @@ export const noteReducer = (noteState, noteAction) => {
       return { ...noteState, color: noteAction.payload };
     case "PINNED":
       return { ...noteState, pinned: !noteAction.payload };
+    case "UNPINNED":
+      return { ...noteState, pinned: !noteAction.payload };
     case "ADD_TAG":
       return { ...noteState, tags: [...noteState.tags, noteAction.payload] };
     case "DELETE_TAG":
-      return {...noteState, tags: noteState.tags.filter(tag => tag !== noteAction.payload)};
+      return {
+        ...noteState,
+        tags: noteState.tags.filter((tag) => tag !== noteAction.payload),
+      };
     case "RESET":
       return {
         title: "",

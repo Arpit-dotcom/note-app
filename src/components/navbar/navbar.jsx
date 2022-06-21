@@ -1,29 +1,40 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "context";
+import { FaBars } from "react-icons/fa";
 import "./navbar.css";
+import { MobileSidebar } from "components";
+import { useState } from "react";
 
-export const Navbar = () =>{
+export const Navbar = () => {
   const { isLoggedIn } = useAuth();
-    return (
-      <nav className="simple-navigation">
-        <span className="nav-list">
-          <h1 className="text">Note App</h1>
-        </span>
+  const [sidebar, setSidebar] = useState(false);
 
-        {/* <input
+  return (
+    <nav className="simple-navigation">
+      {sidebar && <MobileSidebar setSidebar={setSidebar} />}
+      <span className="nav-list">
+        <h1 className="text">
+          <FaBars className="bar" onClick={() => setSidebar((prev) => !prev)} />
+          Note Rush
+        </h1>
+      </span>
+
+      {/* <input
           className="nav-search"
           type="text"
           placeholder="Search for note"
         /> */}
 
-        <div className="nav-list">
-          <div className="list-item icons">
-            <Link className="profile" to={isLoggedIn ? "/logout" : "/login"}>
-              <i className="fas fa-user"></i>
-              <small className="nav-icon-text">{isLoggedIn ? "Logout" : "Login" }</small>
-            </Link>
-          </div>
+      <div className="nav-list">
+        <div className="list-item icons">
+          <Link className="profile" to={isLoggedIn ? "/logout" : "/login"}>
+            <i className="fas fa-user"></i>
+            <small className="nav-icon-text">
+              {isLoggedIn ? "Logout" : "Login"}
+            </small>
+          </Link>
         </div>
-      </nav>
-    );
-}
+      </div>
+    </nav>
+  );
+};

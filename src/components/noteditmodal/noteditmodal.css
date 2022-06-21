@@ -46,8 +46,8 @@
 .edit-container .color-selector {
   margin-right: 1rem;
   border-radius: 50%;
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
   border: 1px solid black;
 }
 
@@ -77,6 +77,10 @@
   padding: 0.5rem;
 }
 
+.edit-container .select .options:hover {
+  background-color: var(--bg-color);
+}
+
 .edit-container .tag-container {
   background-color: var(--white-section);
   min-height: 2.2rem;
@@ -91,18 +95,18 @@
 }
 
 .edit-container .select {
-  position: relative;
+  position: absolute;
   background-color: var(--white-section);
   border: 1px solid var(--default);
   width: 10rem;
-  position: fixed;
-  top: 17.6rem;
+  top: 12rem;
 }
 
 .edit-container .select .close {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  margin: 1rem;
+  right: 0;
+  top: 0;
 }
 
 .edit-container .display-note {
