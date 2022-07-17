@@ -33,25 +33,27 @@ export const NoteModal = ({
       date: currentDate,
       time: currentTime,
     };
-    try {
-      const response = await axios.post(
-        "/api/notes",
-        { note },
-        {
-          headers: {
-            authorization: token,
-          },
-        }
-      );
-      noteArrayDispatch({
-        type: "ADD_TO_NOTE",
-        payload: response.data.notes,
-      });
-      noteDispatch({ type: "RESET" });
-      setPin(false);
-      setShowColor(false);
-    } catch (e) {
-      console.log(e);
+    if (noteState.text !== "" && noteState.title !== "") {
+      try {
+        const response = await axios.post(
+          "/api/notes",
+          { note },
+          {
+            headers: {
+              authorization: token,
+            },
+          }
+        );
+        noteArrayDispatch({
+          type: "ADD_TO_NOTE",
+          payload: response.data.notes,
+        });
+        noteDispatch({ type: "RESET" });
+        setPin(false);
+        setShowColor(false);
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
 
@@ -130,6 +132,7 @@ export const NoteModal = ({
         modules={quillModules}
         value={noteState.text}
         onChange={(event) => noteDispatch({ type: "TEXT", payload: event })}
+        required
       />
       <div
         style={{ backgroundColor: noteState.color }}

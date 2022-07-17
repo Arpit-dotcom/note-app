@@ -18,6 +18,7 @@
   padding: 1rem;
   width: 100%;
   min-height: 40.3rem;
+  margin-bottom: 3rem;
 }
 .fa-sort {
   margin-left: 1rem;
@@ -158,6 +159,7 @@
 }
 
 .sort-modal {
+  z-index: 5;
   position: fixed;
   bottom: 0;
   width: 100vw;

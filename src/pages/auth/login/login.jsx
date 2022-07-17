@@ -55,7 +55,7 @@ export const Login = () => {
           className="submit"
           type="submit"
           onClick={(event) => dummyHandler(event)}
-          value="Login as Test Credential"
+          value="Login as a Guest"
         />
       </form>
       <p>
