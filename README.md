@@ -1,6 +1,6 @@
 # [Live link](https://note-rush.netlify.app/)
 
-A video library where you can learn to draw.
+A note app where you can add, delete and edit note. You can also move note to trash, implement different colors according to need, and get notes based on filters.
 
 #### Stack Used
 
